@@ -11,5 +11,5 @@ public class StudentEntityDto {
     private Long id;
     private int admitYear;
     private Map<String, Object> data;
-//    private Address address;
+    private String deviceDatetime;
 }

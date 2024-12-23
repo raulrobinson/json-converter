@@ -37,6 +37,7 @@ public class StudentController {
             StudentEntityDto student = new StudentEntityDto();
             student.setId(studentEntity.getId());
             student.setAdmitYear(studentEntity.getAdmitYear());
+            student.setDeviceDatetime(String.valueOf(studentEntity.getDeviceDatetime()));
 
             // Deserialization of JSON field to Map<String, Object>.
             if (studentEntity.getData() != null) {
