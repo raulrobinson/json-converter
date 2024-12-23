@@ -6,17 +6,14 @@ import com.rasysbox.ws.application.dto.StudentEntityDto;
 import com.rasysbox.ws.infrastructure.persistence.entity.StudentEntity;
 import com.rasysbox.ws.infrastructure.persistence.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping(value = "/students", produces = "application/json")
 public class StudentController {
 
     private final StudentRepository studentRepository;
@@ -56,21 +53,14 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public void saveStudent(int admitYear, String jsonField) {
+    public void saveStudent(@RequestParam("admitYear") int admitYear,
+                            @RequestParam("jsonField") String jsonField) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.readTree(jsonField);
-
-            StudentEntity testJsonField = new StudentEntity();
-            testJsonField.setData(jsonField);
-
             Timestamp deviceDatetime = new Timestamp(System.currentTimeMillis());
-
-            StudentEntity student = new StudentEntity();
-            student.setAdmitYear(admitYear);
-            student.setData(jsonField);
-            student.setDeviceDatetime(deviceDatetime);
-            studentRepository.saveField(admitYear, jsonField, deviceDatetime);
+            studentRepository.saveField(
+                    admitYear,
+                    jsonField,
+                    deviceDatetime);
         } catch (Exception e) {
             throw new RuntimeException("Error saving student", e);
         }

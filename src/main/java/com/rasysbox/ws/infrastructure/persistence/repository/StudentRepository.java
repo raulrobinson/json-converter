@@ -1,5 +1,6 @@
 package com.rasysbox.ws.infrastructure.persistence.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rasysbox.ws.infrastructure.persistence.entity.StudentEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, String> {
